@@ -32,13 +32,13 @@ function Home() {
       <div className="row">
         <div className="twelve columns">
           <div className="card">
-            <h1>Chat App</h1>
-            <p>Enter a room number to start chatting!</p>
+            <h1>悄悄话聊天室</h1>
+            <p>这是我们的小秘密!</p>
             <form onSubmit={handleJoin} className="room-form">
               <div className="input-group">
                 <input
                   type="text"
-                  placeholder="Room Number"
+                  placeholder="房间号"
                   value={roomId}
                   onChange={(e) => setRoomId(e.target.value)}
                   className="u-full-width"
@@ -48,11 +48,11 @@ function Home() {
                   onClick={handleRandom}
                   className="button-secondary"
                 >
-                  Random
+                  随机生成
                 </button>
               </div>
               <button type="submit" className="button-primary u-full-width">
-                Join Room
+                加入房间
               </button>
             </form>
           </div>
@@ -130,24 +130,23 @@ function Chat() {
         <div className="four columns sidebar">
           <div className="sidebar-content">
             <h4>
-              <b>Chat</b>
+              <b>悄悄话</b>
             </h4>
             <p className="sidebar-desc">
-              Room: <strong>{room}</strong>
+              房间号: <strong>{room}</strong>
             </p>
             <p className="sidebar-info">
-              This chat room is hosted in a single Durable Object, running in one
-              process in one machine in one location.
+              你一定设了一个特别的房间号吧，那么将会没有人会知道你说了什么，尽情聊天吧！如果想换个地方聊，点击下面的按钮。
             </p>
             <button onClick={() => navigate("/")} className="u-full-width">
-              Change Room
+              换个地方聊天
             </button>
           </div>
         </div>
         <div className="eight columns chat-section">
           <div className="messages-container" ref={scrollRef}>
             {messages.length === 0 && (
-              <div className="empty-chat">No messages yet. Say hi!</div>
+              <div className="empty-chat">还没有消息。说声你好吧！</div>
             )}
             {messages.map((message) => (
               <div key={message.id} className="message-row">
@@ -188,11 +187,11 @@ function Chat() {
               type="text"
               name="content"
               className="u-full-width"
-              placeholder={`Hello ${name}! Type a message...`}
+              placeholder={`你好 ${name}! 悄悄告诉他没人会知道的...`}
               autoComplete="off"
             />
             <button type="submit" className="button-primary">
-              Send
+              发送
             </button>
           </form>
         </div>
