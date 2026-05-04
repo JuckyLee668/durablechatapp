@@ -1,12 +1,12 @@
-/* Color Palette - Inspired by xi-han.top */
+/* Color Palette - Inspired by the provided Blue-Purple Gradient Reference */
 :root {
-  --background-color: #ffffff;
-  --surface-color: #f8f9fa;
-  --primary-color: #007bff;
-  --primary-hover: #0056b3;
-  --text-heading: #212529;
-  --text-body: #6c757d;
-  --border-color: #dee2e6;
+  --bg-color: #0f172a; /* Dark navy background */
+  --surface-color: #1e293b; /* Slightly lighter surface */
+  --accent-gradient: linear-gradient(135deg, #b8a0ff, #64c8ff);
+  --primary-color: #64c8ff;
+  --text-heading: #f8fafc;
+  --text-body: #94a3b8;
+  --border-color: #334155;
 }
 
 /* Base Styles */
@@ -15,8 +15,8 @@ html {
   height: 100%;
   margin: 0;
   padding: 0;
-  background-color: var(--background-color);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background-color: var(--bg-color);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   color: var(--text-body);
 }
 
@@ -26,36 +26,54 @@ html {
 
 .container {
   height: 100%;
-  max-width: 900px;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
 h1, h2, h3, h4, h5, h6, b, strong {
   color: var(--text-heading);
 }
 
+/* Hero Title with Gradient */
+.hero-title {
+  font-size: clamp(2.5rem, 8vw, 4rem);
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+  font-weight: 800;
+  margin-bottom: 24px;
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
 /* Buttons */
 .button-primary, 
 button[type="submit"] {
-  background-color: var(--primary-color) !important;
-  border-color: var(--primary-color) !important;
-  color: white !important;
+  background: var(--accent-gradient) !important;
+  border: none !important;
+  color: #0f172a !important; /* Dark text on light gradient */
+  font-weight: 700;
+  text-transform: none;
+  border-radius: 8px;
+  transition: opacity 0.2s;
 }
 
 .button-primary:hover,
 button[type="submit"]:hover {
-  background-color: var(--primary-hover) !important;
-  border-color: var(--primary-hover) !important;
+  opacity: 0.9;
 }
 
 .button-secondary {
   background-color: transparent;
-  border-color: var(--border-color);
-  color: var(--text-body);
+  border: 1px solid var(--border-color);
+  color: var(--text-heading);
+  border-radius: 8px;
 }
 
 .button-secondary:hover {
-  border-color: var(--text-heading);
-  color: var(--text-heading);
+  background-color: var(--border-color);
+  border-color: var(--text-body);
 }
 
 /* Home Page Styles */
@@ -64,30 +82,37 @@ button[type="submit"]:hover {
   justify-content: center;
   align-items: center;
   text-align: center;
+  padding: 20px;
 }
 
 .card {
   background: var(--surface-color);
-  padding: 40px;
-  border-radius: 12px;
+  padding: 50px;
+  border-radius: 24px;
   border: 1px solid var(--border-color);
-  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  max-width: 500px;
 }
 
 .input-group {
   display: flex;
-  gap: 10px;
+  gap: 12px;
   margin-bottom: 20px;
 }
 
 .input-group input {
   margin-bottom: 0;
   flex-grow: 1;
-  border-color: var(--border-color);
+  background: var(--bg-color);
+  border: 1px solid var(--border-color);
+  color: white;
+  border-radius: 8px;
 }
 
 .input-group input:focus {
   border-color: var(--primary-color);
+  outline: none;
 }
 
 /* Chat Layout Styles */
@@ -106,25 +131,28 @@ button[type="submit"]:hover {
 .sidebar {
   background: var(--surface-color);
   border-right: 1px solid var(--border-color);
-  padding: 30px;
+  padding: 40px;
   height: 100%;
   display: flex;
   flex-direction: column;
 }
 
 .sidebar h4 {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
-.sidebar-desc {
-  font-size: 1.1rem;
-  margin-bottom: 20px;
-  color: var(--text-heading);
+.room-tag {
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 800;
+  font-size: 1.5rem;
 }
 
 .sidebar-info {
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   color: var(--text-body);
+  margin-top: 20px;
   margin-bottom: auto;
   line-height: 1.6;
 }
@@ -133,38 +161,38 @@ button[type="submit"]:hover {
   display: flex;
   flex-direction: column;
   height: 100%;
-  padding: 20px;
-  background: white;
+  padding: 30px;
+  background: var(--bg-color);
 }
 
 .messages-container {
   flex-grow: 1;
   overflow-y: auto;
-  padding: 15px;
-  margin-bottom: 20px;
+  padding: 20px;
+  margin-bottom: 24px;
   border: 1px solid var(--border-color);
-  border-radius: 8px;
-  background: #fff;
+  border-radius: 16px;
+  background: var(--surface-color);
 }
 
 .message-row {
-  margin-bottom: 15px;
+  margin-bottom: 16px;
   display: flex;
   flex-direction: column;
 }
 
 .user-name {
   font-weight: 600;
-  font-size: 0.8rem;
-  color: var(--text-heading);
+  font-size: 0.85rem;
+  color: var(--primary-color);
   margin-bottom: 4px;
 }
 
 .message-content {
-  background: var(--surface-color);
+  background: var(--bg-color);
   border: 1px solid var(--border-color);
-  padding: 10px 14px;
-  border-radius: 8px;
+  padding: 12px 18px;
+  border-radius: 12px;
   display: inline-block;
   max-width: 85%;
   word-wrap: break-word;
@@ -174,17 +202,21 @@ button[type="submit"]:hover {
 .empty-chat {
   text-align: center;
   color: var(--text-body);
-  margin-top: 50px;
+  margin-top: 100px;
+  font-style: italic;
 }
 
 .input-row {
   display: flex;
-  gap: 10px;
+  gap: 12px;
 }
 
 .input-row input {
   margin-bottom: 0;
-  border-color: var(--border-color);
+  background: var(--surface-color);
+  border: 1px solid var(--border-color);
+  color: white;
+  border-radius: 8px;
 }
 
 .input-row input:focus {
@@ -193,15 +225,14 @@ button[type="submit"]:hover {
 
 /* Responsive Queries */
 
-/* Tablet and below */
-@media (max-width: 750px) {
+@media (max-width: 768px) {
   .main-layout > .row {
     flex-direction: column;
   }
 
   .sidebar {
     height: auto;
-    padding: 15px;
+    padding: 20px;
     border-right: none;
     border-bottom: 1px solid var(--border-color);
   }
@@ -214,7 +245,7 @@ button[type="submit"]:hover {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 10px;
+    gap: 15px;
   }
 
   .sidebar-content h4, .sidebar-content p {
@@ -228,13 +259,18 @@ button[type="submit"]:hover {
 
   .chat-section {
     flex-grow: 1;
+    padding: 15px;
   }
 }
 
-/* Mobile specifically */
-@media (max-width: 400px) {
+@media (max-width: 480px) {
   .card {
-    padding: 20px;
+    padding: 30px 20px;
+    border-radius: 16px;
+  }
+
+  .hero-title {
+    font-size: 2.2rem;
   }
 
   .input-group {
