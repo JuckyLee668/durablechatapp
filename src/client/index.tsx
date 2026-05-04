@@ -28,35 +28,33 @@ function Home() {
   };
 
   return (
-    <div className="page-wrapper center-content">
-      <div className="container">
-        <div className="row">
-          <div className="twelve columns">
-            <div className="card">
-              <h1 className="hero-title">聊天应用</h1>
-              <p className="hero-subtitle">输入房间号开始聊天！</p>
-              <form onSubmit={handleJoin} className="room-form">
-                <div className="input-group">
-                  <input
-                    type="text"
-                    placeholder="房间号"
-                    value={roomId}
-                    onChange={(e) => setRoomId(e.target.value)}
-                    className="u-full-width"
-                  />
-                  <button
-                    type="button"
-                    onClick={handleRandom}
-                    className="button-secondary"
-                  >
-                    随机
-                  </button>
-                </div>
-                <button type="submit" className="button-primary u-full-width">
-                  进入房间
+    <div className="container center-content">
+      <div className="row">
+        <div className="twelve columns">
+          <div className="card">
+            <h1>Chat App</h1>
+            <p>Enter a room number to start chatting!</p>
+            <form onSubmit={handleJoin} className="room-form">
+              <div className="input-group">
+                <input
+                  type="text"
+                  placeholder="Room Number"
+                  value={roomId}
+                  onChange={(e) => setRoomId(e.target.value)}
+                  className="u-full-width"
+                />
+                <button
+                  type="button"
+                  onClick={handleRandom}
+                  className="button-secondary"
+                >
+                  Random
                 </button>
-              </form>
-            </div>
+              </div>
+              <button type="submit" className="button-primary u-full-width">
+                Join Room
+              </button>
+            </form>
           </div>
         </div>
       </div>
@@ -127,75 +125,76 @@ function Chat() {
   }, [messages]);
 
   return (
-    <div className="page-wrapper main-layout">
-      <div className="container">
-        <div className="row chat-layout-row">
-          <div className="four columns sidebar">
-            <div className="sidebar-content">
-              <h4 className="gradient-text">聊天应用</h4>
-              <p className="sidebar-desc">
-                房间： <strong>{room}</strong>
-              </p>
-              <p className="sidebar-info">
-                此聊天室托管在单个 Durable Object 中，运行在单一位置的一台机器的一个进程中。
-              </p>
-              <button onClick={() => navigate("/")} className="u-full-width button-secondary">
-                切换房间
-              </button>
-            </div>
+    <div className="container main-layout">
+      <div className="row">
+        <div className="four columns sidebar">
+          <div className="sidebar-content">
+            <h4>
+              <b>Chat</b>
+            </h4>
+            <p className="sidebar-desc">
+              Room: <strong>{room}</strong>
+            </p>
+            <p className="sidebar-info">
+              This chat room is hosted in a single Durable Object, running in one
+              process in one machine in one location.
+            </p>
+            <button onClick={() => navigate("/")} className="u-full-width">
+              Change Room
+            </button>
           </div>
-          <div className="eight columns chat-section">
-            <div className="messages-container" ref={scrollRef}>
-              {messages.length === 0 && (
-                <div className="empty-chat">暂无消息。打个招呼吧！</div>
-              )}
-              {messages.map((message) => (
-                <div key={message.id} className="message-row">
-                  <span className="user-name">{message.user}</span>
-                  <span className="message-content">{message.content}</span>
-                </div>
-              ))}
-            </div>
-            <form
-              className="input-row"
-              onSubmit={(e) => {
-                e.preventDefault();
-                const contentInput = e.currentTarget.elements.namedItem(
-                  "content",
-                ) as HTMLInputElement;
-                if (!contentInput.value.trim()) return;
-
-                const chatMessage: ChatMessage = {
-                  id: nanoid(8),
-                  content: contentInput.value,
-                  user: name,
-                  role: "user",
-                };
-
-                setMessages((messages) => [...messages, chatMessage]);
-
-                socket.send(
-                  JSON.stringify({
-                    type: "add",
-                    ...chatMessage,
-                  } satisfies Message),
-                );
-
-                contentInput.value = "";
-              }}
-            >
-              <input
-                type="text"
-                name="content"
-                className="u-full-width"
-                placeholder={`你好 ${name}！输入消息...`}
-                autoComplete="off"
-              />
-              <button type="submit" className="button-primary">
-                发送
-              </button>
-            </form>
+        </div>
+        <div className="eight columns chat-section">
+          <div className="messages-container" ref={scrollRef}>
+            {messages.length === 0 && (
+              <div className="empty-chat">No messages yet. Say hi!</div>
+            )}
+            {messages.map((message) => (
+              <div key={message.id} className="message-row">
+                <span className="user-name">{message.user}</span>
+                <span className="message-content">{message.content}</span>
+              </div>
+            ))}
           </div>
+          <form
+            className="input-row"
+            onSubmit={(e) => {
+              e.preventDefault();
+              const contentInput = e.currentTarget.elements.namedItem(
+                "content",
+              ) as HTMLInputElement;
+              if (!contentInput.value.trim()) return;
+
+              const chatMessage: ChatMessage = {
+                id: nanoid(8),
+                content: contentInput.value,
+                user: name,
+                role: "user",
+              };
+
+              setMessages((messages) => [...messages, chatMessage]);
+
+              socket.send(
+                JSON.stringify({
+                  type: "add",
+                  ...chatMessage,
+                } satisfies Message),
+              );
+
+              contentInput.value = "";
+            }}
+          >
+            <input
+              type="text"
+              name="content"
+              className="u-full-width"
+              placeholder={`Hello ${name}! Type a message...`}
+              autoComplete="off"
+            />
+            <button type="submit" className="button-primary">
+              Send
+            </button>
+          </form>
         </div>
       </div>
     </div>

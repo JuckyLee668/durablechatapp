@@ -1,13 +1,12 @@
-/* Color Palette - Vibrant Blue-Purple Gradient Theme */
+/* Color Palette - Inspired by the provided Blue-Purple Gradient Reference */
 :root {
-  --bg-dark: #0f172a;
-  --bg-card: #1e293b;
-  --primary-gradient: linear-gradient(135deg, #b8a0ff, #64c8ff);
-  --text-primary: #f8fafc;
-  --text-secondary: #94a3b8;
-  --accent-purple: #b8a0ff;
-  --accent-blue: #64c8ff;
-  --border-color: rgba(255, 255, 255, 0.1);
+  --bg-color: #0f172a; /* Dark navy background */
+  --surface-color: #1e293b; /* Slightly lighter surface */
+  --accent-gradient: linear-gradient(135deg, #b8a0ff, #64c8ff);
+  --primary-color: #64c8ff;
+  --text-heading: #f8fafc;
+  --text-body: #94a3b8;
+  --border-color: #334155;
 }
 
 /* Base Styles */
@@ -16,9 +15,9 @@ html {
   height: 100%;
   margin: 0;
   padding: 0;
-  background-color: var(--bg-dark);
-  font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif;
-  color: var(--text-primary);
+  background-color: var(--bg-color);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  color: var(--text-body);
 }
 
 #root {
@@ -28,17 +27,21 @@ html {
 .container {
   height: 100%;
   max-width: 1000px;
+  margin: 0 auto;
 }
 
-h1, h2, h3, h4 {
-  font-weight: 800;
+h1, h2, h3, h4, h5, h6, b, strong {
+  color: var(--text-heading);
+}
+
+/* Hero Title with Gradient */
+.hero-title {
+  font-size: clamp(2.5rem, 8vw, 4rem);
+  line-height: 1.1;
   letter-spacing: -0.04em;
-  margin-bottom: 16px;
-}
-
-/* Gradient Text for Main Titles */
-.hero-title, .hero-subtitle, .gradient-text, h1, .sidebar h4 {
-  background: var(--primary-gradient);
+  font-weight: 800;
+  margin-bottom: 24px;
+  background: var(--accent-gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   display: inline-block;
@@ -47,12 +50,13 @@ h1, h2, h3, h4 {
 /* Buttons */
 .button-primary, 
 button[type="submit"] {
-  background: var(--primary-gradient) !important;
+  background: var(--accent-gradient) !important;
   border: none !important;
-  color: #0f172a !important;
-  font-weight: 700 !important;
-  text-transform: none !important;
-  transition: opacity 0.2s ease;
+  color: #0f172a !important; /* Dark text on light gradient */
+  font-weight: 700;
+  text-transform: none;
+  border-radius: 8px;
+  transition: opacity 0.2s;
 }
 
 .button-primary:hover,
@@ -61,15 +65,15 @@ button[type="submit"]:hover {
 }
 
 .button-secondary {
-  background: rgba(255, 255, 255, 0.05);
+  background-color: transparent;
   border: 1px solid var(--border-color);
-  color: var(--text-primary);
-  font-weight: 600;
+  color: var(--text-heading);
+  border-radius: 8px;
 }
 
 .button-secondary:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: var(--accent-blue);
+  background-color: var(--border-color);
+  border-color: var(--text-body);
 }
 
 /* Home Page Styles */
@@ -82,38 +86,33 @@ button[type="submit"]:hover {
 }
 
 .card {
-  background: var(--bg-card);
-  padding: 48px;
+  background: var(--surface-color);
+  padding: 50px;
   border-radius: 24px;
   border: 1px solid var(--border-color);
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
   width: 100%;
-  max-width: 450px;
+  max-width: 500px;
 }
 
 .input-group {
   display: flex;
   gap: 12px;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
 }
 
-.input-group input, 
-.input-row input {
-  background: rgba(15, 23, 42, 0.5);
-  border: 1px solid var(--border-color);
-  color: white;
+.input-group input {
   margin-bottom: 0;
   flex-grow: 1;
-  border-radius: 12px;
-  padding: 10px 16px;
-  height: 48px;
+  background: var(--bg-color);
+  border: 1px solid var(--border-color);
+  color: white;
+  border-radius: 8px;
 }
 
-.input-group input:focus,
-.input-row input:focus {
-  border-color: var(--accent-blue);
+.input-group input:focus {
+  border-color: var(--primary-color);
   outline: none;
-  box-shadow: 0 0 0 2px rgba(100, 200, 255, 0.2);
 }
 
 /* Chat Layout Styles */
@@ -130,23 +129,30 @@ button[type="submit"]:hover {
 }
 
 .sidebar {
-  background: var(--bg-card);
+  background: var(--surface-color);
   border-right: 1px solid var(--border-color);
-  padding: 40px 30px;
+  padding: 40px;
   height: 100%;
   display: flex;
   flex-direction: column;
 }
 
-.sidebar-desc {
-  font-size: 1.1rem;
-  margin-bottom: 24px;
-  color: var(--text-primary);
+.sidebar h4 {
+  margin-bottom: 10px;
+}
+
+.room-tag {
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 800;
+  font-size: 1.5rem;
 }
 
 .sidebar-info {
   font-size: 0.9rem;
-  color: var(--text-secondary);
+  color: var(--text-body);
+  margin-top: 20px;
   margin-bottom: auto;
   line-height: 1.6;
 }
@@ -155,8 +161,8 @@ button[type="submit"]:hover {
   display: flex;
   flex-direction: column;
   height: 100%;
-  padding: 24px;
-  background: var(--bg-dark);
+  padding: 30px;
+  background: var(--bg-color);
 }
 
 .messages-container {
@@ -164,65 +170,62 @@ button[type="submit"]:hover {
   overflow-y: auto;
   padding: 20px;
   margin-bottom: 24px;
-  background: rgba(30, 41, 59, 0.3);
-  border-radius: 16px;
   border: 1px solid var(--border-color);
+  border-radius: 16px;
+  background: var(--surface-color);
 }
 
 .message-row {
-  margin-bottom: 20px;
+  margin-bottom: 16px;
   display: flex;
   flex-direction: column;
 }
 
 .user-name {
-  font-weight: 700;
+  font-weight: 600;
   font-size: 0.85rem;
-  color: var(--accent-blue);
-  margin-bottom: 6px;
+  color: var(--primary-color);
+  margin-bottom: 4px;
 }
 
 .message-content {
-  background: var(--bg-card);
+  background: var(--bg-color);
   border: 1px solid var(--border-color);
   padding: 12px 18px;
-  border-radius: 16px;
+  border-radius: 12px;
   display: inline-block;
-  max-width: 80%;
+  max-width: 85%;
   word-wrap: break-word;
-  color: var(--text-primary);
-  line-height: 1.5;
+  color: var(--text-heading);
 }
 
 .empty-chat {
   text-align: center;
-  color: var(--text-secondary);
-  margin-top: 60px;
+  color: var(--text-body);
+  margin-top: 100px;
   font-style: italic;
 }
 
 .input-row {
   display: flex;
   gap: 12px;
-  padding: 12px;
-  background: var(--bg-card);
-  border-radius: 16px;
-  border: 1px solid var(--border-color);
 }
 
 .input-row input {
-  background: transparent;
-  border: none;
-  height: auto;
+  margin-bottom: 0;
+  background: var(--surface-color);
+  border: 1px solid var(--border-color);
+  color: white;
+  border-radius: 8px;
 }
 
 .input-row input:focus {
-  box-shadow: none;
+  border-color: var(--primary-color);
 }
 
 /* Responsive Queries */
 
-@media (max-width: 750px) {
+@media (max-width: 768px) {
   .main-layout > .row {
     flex-direction: column;
   }
@@ -246,26 +249,28 @@ button[type="submit"]:hover {
   }
 
   .sidebar-content h4, .sidebar-content p {
-    margin: 0;
+    margin-bottom: 0;
   }
 
   .sidebar-content button {
     width: auto !important;
-    margin: 0;
-    padding: 0 15px;
-    height: 36px;
-    line-height: 36px;
+    margin-bottom: 0;
   }
 
   .chat-section {
     flex-grow: 1;
-    padding: 16px;
+    padding: 15px;
   }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 480px) {
   .card {
     padding: 30px 20px;
+    border-radius: 16px;
+  }
+
+  .hero-title {
+    font-size: 2.2rem;
   }
 
   .input-group {
